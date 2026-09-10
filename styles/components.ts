@@ -1,12 +1,19 @@
 import { StyleSheet } from "react-native";
 
-/* Estilos de componentes reutilizables */
+/* Se reutiliza el archivo de estilos de otros proyectos ya
+   que se pueden aplicar los mismos estilos a los componentes 
+  de esta aplicación. */
+
+/* ************************************************* */
+/* ESTILOS GENERALES DE COMPONENTES                  */
+/* ************************************************* */
 
 export const componentStyles = StyleSheet.create({
-  /* ==================== TEXTOS ==================== */
+  /* ************************************************* */
+  /*                     TEXTOS                        */
+  /* ************************************************* */
 
   /* Título principal */
-
   title: {
     fontSize: 28,
     fontWeight: "bold",
@@ -15,7 +22,6 @@ export const componentStyles = StyleSheet.create({
   },
 
   /* Subtítulo */
-
   subtitle: {
     fontSize: 15,
     color: "#8B6F5A",
@@ -23,7 +29,6 @@ export const componentStyles = StyleSheet.create({
   },
 
   /* Título de una tarjeta de libro */
-
   bookTitle: {
     fontSize: 18,
     fontWeight: "bold",
@@ -32,7 +37,6 @@ export const componentStyles = StyleSheet.create({
   },
 
   /* Autor del libro */
-
   bookAuthor: {
     fontSize: 15,
     color: "#6D5141",
@@ -40,17 +44,17 @@ export const componentStyles = StyleSheet.create({
   },
 
   /* Información adicional del libro */
-
   bookInfo: {
     fontSize: 13,
     color: "#8B6F5A",
     marginBottom: 3,
   },
 
-  /* ==================== TARJETAS ==================== */
+  /* ************************************************* */
+  /*                     TARJETAS                      */
+  /* ************************************************* */
 
   /* Tarjeta utilizada para mostrar información de un libro */
-
   bookCard: {
     backgroundColor: "#FFFDF8",
     padding: 18,
@@ -60,10 +64,11 @@ export const componentStyles = StyleSheet.create({
     borderColor: "#E2D5C5",
   },
 
-  /* ==================== INPUTS ==================== */
+  /* ************************************************* */
+  /*                     INPUTS                        */
+  /* ************************************************* */
 
   /* Campo de entrada de texto */
-
   input: {
     backgroundColor: "#FFFDF8",
     borderWidth: 1,
@@ -74,10 +79,11 @@ export const componentStyles = StyleSheet.create({
     color: "#5C4033",
   },
 
-  /* ==================== BOTONES ==================== */
+  /* ************************************************* */
+  /*                     BOTONES                       */
+  /* ************************************************* */
 
   /* Botón para explorar la biblioteca */
-
   libraryButton: {
     backgroundColor: "#6B4F3A",
     paddingVertical: 13,
@@ -88,7 +94,6 @@ export const componentStyles = StyleSheet.create({
   },
 
   /* Texto del botón para explorar la biblioteca */
-
   libraryButtonText: {
     color: "#F4D06F",
     fontSize: 15,
@@ -96,7 +101,6 @@ export const componentStyles = StyleSheet.create({
   },
 
   /* Botón de inicio de sesión */
-
   loginButton: {
     backgroundColor: "#6B4F3A",
     borderRadius: 8,
@@ -105,10 +109,32 @@ export const componentStyles = StyleSheet.create({
   },
 
   /* Texto del botón de inicio de sesión */
-
   loginButtonText: {
     color: "#F4D06F",
     fontSize: 16,
     fontWeight: "bold",
+  },
+
+  /* ************************************************* */
+  /*                 MENÚ DE NAVEGACIÓN                */
+  /* ************************************************* */
+
+  /* Estilo del menú lateral */
+  drawerStyle: {
+    backgroundColor: "#F5EFE6",
+    width: 300,
+  },
+
+  /* Estilo del texto de las opciones del menú */
+  drawerLabelStyle: {
+    /* color: "#5C4033", */
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+
+  /* Espacio y forma de las opciones del menú */
+  drawerItemStyle: {
+    borderRadius: 8,
+    marginVertical: 4,
   },
 });

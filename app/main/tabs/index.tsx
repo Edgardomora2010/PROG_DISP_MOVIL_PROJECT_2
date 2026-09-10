@@ -2,7 +2,6 @@
 import { Pressable, Text, View } from "react-native";
 
 /* Importación de navegación */
-import { useNavigation } from "@react-navigation/native";
 import { router } from "expo-router";
 
 /* Importación de estilos */
@@ -11,8 +10,6 @@ import { layoutStyles } from "../../../styles/layout";
 
 /* Componente de la pantalla de inicio */
 export default function Home() {
-  const navigation = useNavigation();
-
   return (
     <View style={layoutStyles.container}>
       <Text style={componentStyles.title}>Recetario Medieval</Text>

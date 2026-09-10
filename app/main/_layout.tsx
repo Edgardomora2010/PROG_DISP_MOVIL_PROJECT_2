@@ -4,6 +4,9 @@ import { Drawer } from "expo-router/drawer";
 /* Importación de iconos */
 import { Ionicons } from "@expo/vector-icons";
 
+/* Importación de estilos */
+import { componentStyles } from "../../styles/components";
+
 /* Componente de diseño de la aplicación */
 export default function MainLayout() {
   return (
@@ -13,23 +16,13 @@ export default function MainLayout() {
         headerTitle: "Recetario Medieval",
 
         /* Estilo del menú lateral */
-        drawerStyle: {
-          backgroundColor: "#F5EFE6",
-          width: 300,
-        },
+        drawerStyle: componentStyles.drawerStyle,
 
         /* Estilo del texto de las opciones */
-        drawerLabelStyle: {
-          color: "#5C4033",
-          fontSize: 16,
-          fontWeight: "bold",
-        },
+        drawerLabelStyle: componentStyles.drawerLabelStyle,
 
         /* Espacio entre las opciones */
-        drawerItemStyle: {
-          borderRadius: 8,
-          marginVertical: 4,
-        },
+        drawerItemStyle: componentStyles.drawerItemStyle,
 
         /* Color de la opción seleccionada */
         drawerActiveTintColor: "#F4D06F",
