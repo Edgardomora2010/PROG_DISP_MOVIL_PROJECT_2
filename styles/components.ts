@@ -137,4 +137,252 @@ export const componentStyles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 4,
   },
+
+  /* ************************************************* */
+  /*              CATALOGO DE RECETAS                  */
+  /* ************************************************* */
+
+  /* Fondo de la pantalla de recetas */
+  recipeBackground: {
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingVertical: 40,
+  },
+
+  /* Fondo del catálogo de recetas */
+  recipePaper: {
+    marginLeft: -10,
+    width: "102%",
+    height: "90%",
+    alignSelf: "center",
+    overflow: "hidden",
+  },
+
+  /* Contenedor de la lista de recetas */
+  recipeListContainer: {
+    /* flex: 1,*/
+    width: "98%",
+    height: "80%",
+    paddingTop: 60,
+  },
+
+  recipeList: {
+    paddingHorizontal: 20,
+    paddingTop: 60,
+    paddingBottom: 20,
+  },
+
+  recipeItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 253, 248, 0.80)",
+    borderRadius: 12,
+    paddingVertical: 15,
+    paddingHorizontal: 16,
+    marginBottom: 14,
+    borderWidth: 2,
+    borderColor: "#77520d",
+  },
+
+  recipeItemPressed: {
+    backgroundColor: "#6B4F3A",
+    transform: [{ scale: 0.98 }],
+  },
+
+  recipeLabel: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#5C4033",
+    marginHorizontal: 14,
+  },
+
+  recipeLabelPressed: {
+    color: "#F4D06F",
+  },
+
+  /* Estilos del pie de página del catálogo */
+
+  recipeFooter: {
+    width: "95%",
+    alignSelf: "center",
+    marginTop: -40,
+    paddingVertical: 10,
+    backgroundColor: "#F5EFE6",
+    borderWidth: 2,
+    borderColor: "#77520d",
+    borderRadius: 14,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+
+  recipeFooterItem: {
+    alignItems: "center",
+    paddingHorizontal: 15,
+  },
+
+  recipeFooterText: {
+    marginTop: 4,
+    fontSize: 13,
+    fontWeight: "bold",
+    color: "#6B4F3A",
+  },
+
+  /* ************************************************* */
+  /*              DETALLE DE LA RECETA                 */
+  /* ************************************************* */
+
+  /* Contenedor general del detalle de la receta */
+  recipeDetailsContainer: {
+    flex: 1,
+    backgroundColor: "transparent",
+  },
+
+  /* Contenido desplazable del detalle */
+  recipeDetailsContent: {
+    padding: 20,
+    paddingBottom: 30,
+  },
+
+  /* Encabezado de la receta */
+  recipeDetailsHeader: {
+    backgroundColor: "rgba(245, 239, 230, 0.95)",
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+  },
+
+  /* Título de la receta */
+  recipeDetailsTitle: {
+    fontSize: 38,
+    fontWeight: "bold",
+    color: "#fbf7f3",
+    marginBottom: 5,
+  },
+
+  /* Título original de la receta */
+  recipeDetailsOriginalTitle: {
+    fontSize: 25,
+    fontStyle: "italic",
+    color: "#fbf7f3",
+  },
+
+  /* Tarjeta de ingredientes e imagen */
+  recipeIngredientsCard: {
+    backgroundColor: "#FFFDF8",
+    padding: 18,
+    borderRadius: 10,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#E2D5C5",
+    flexDirection: "row",
+  },
+
+  /* Contenedor de los ingredientes */
+  recipeIngredientsContent: {
+    flex: 1,
+    paddingRight: 12,
+  },
+
+  /* Imagen de la receta */
+  recipeDetailsImage: {
+    width: 110,
+    height: 110,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+  },
+
+  /* Espacio temporal para la imagen de la receta */
+  recipeDetailsImagePlaceholder: {
+    width: 110,
+    height: 110,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+    backgroundColor: "#E8D7BD",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  /* Texto del espacio temporal de imagen */
+  recipeDetailsImageText: {
+    marginTop: 5,
+    fontSize: 12,
+    color: "#8B6F5A",
+  },
+
+  /* Título de las secciones */
+  recipeSectionTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#5C4033",
+    marginBottom: 10,
+  },
+
+  /* Ingrediente individual */
+  recipeIngredient: {
+    fontSize: 14,
+    color: "#6D5141",
+    marginBottom: 5,
+  },
+
+  /* Texto de las secciones */
+  recipeDetailsText: {
+    fontSize: 14,
+    lineHeight: 21,
+    color: "#6D5141",
+    textAlign: "justify",
+  },
+
+  /* Tarjeta de información histórica y preparación */
+  recipeDetailsCard: {
+    backgroundColor: "#FFFDF8",
+    padding: 18,
+    borderRadius: 10,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#E2D5C5",
+  },
+
+  /* Información de la fuente */
+  recipeSourceText: {
+    fontSize: 13,
+    lineHeight: 19,
+    color: "#8B6F5A",
+    marginBottom: 4,
+  },
+
+  /* Contenedor de las acciones del detalle */
+  recipeDetailsActions: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginTop: 5,
+    marginBottom: 20,
+    paddingVertical: 10,
+    backgroundColor: "#F5EFE6",
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+    borderRadius: 14,
+  },
+
+  /* Botón de acción del detalle */
+  recipeDetailsAction: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+  },
+
+  /* Texto de los botones de acción */
+  recipeDetailsActionText: {
+    marginLeft: 7,
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#6B4F3A",
+  },
 });

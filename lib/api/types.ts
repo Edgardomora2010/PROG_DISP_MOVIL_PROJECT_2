@@ -1,4 +1,11 @@
-export interface Post {
+/* Se utiliza este archivo para definir los tipos de datos
+ que se utilizan en la aplicación. */
+
+/* A su vez Recipe me resulta más conveniente y representativo,
+ que el ejemplo con Post, ya que se trata de una receta y no de 
+ operaciones HTTP(GET, POST, PUT, DELETE,  PATCH)  */
+
+export interface Recipe {
   id: number;
   created_at: string;
   title: string;
@@ -20,6 +27,9 @@ export interface Post {
   recipe_context: string;
 }
 
+/* Se define un tipo de datos genérico para representar el estado 
+de una operación asíncrona, que puede ser de cualquier tipo T. 
+ Contiene tres propiedades: data, loading y error. */
 export interface State<T> {
   data: T | null;
   loading: boolean;

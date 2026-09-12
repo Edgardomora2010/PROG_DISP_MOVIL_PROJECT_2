@@ -1,11 +1,12 @@
 /* Importación del componente Drawer de Expo Router */
 import { Drawer } from "expo-router/drawer";
-
 /* Importación de iconos */
 import { Ionicons } from "@expo/vector-icons";
-
 /* Importación de estilos */
 import { componentStyles } from "../../styles/components";
+/* Importación de Alert de React Native */
+import { router } from "expo-router";
+import { Alert } from "react-native";
 
 /* Componente de diseño de la aplicación */
 export default function MainLayout() {
@@ -38,6 +39,12 @@ export default function MainLayout() {
           drawerIcon: ({ color, size }) => (
             <Ionicons name="home-outline" size={size} color={color} />
           ),
+        }}
+        listeners={{
+          drawerItemPress: (event) => {
+            event.preventDefault();
+            router.replace("../main/tabs/index");
+          },
         }}
       />
 
@@ -78,6 +85,28 @@ export default function MainLayout() {
           drawerIcon: ({ color, size }) => (
             <Ionicons name="log-out-outline" size={size} color={color} />
           ),
+          drawerItemStyle: componentStyles.drawerItemStyle,
+        }}
+        listeners={{
+          drawerItemPress: (event) => {
+            event.preventDefault();
+
+            Alert.alert(
+              "Cerrar sesión",
+              "¿Está seguro de que desea cerrar sesión?",
+              [
+                {
+                  text: "Cancelar",
+                  style: "cancel",
+                },
+                {
+                  text: "Cerrar sesión",
+                  style: "destructive",
+                  onPress: () => router.replace("/authenticate/login"),
+                },
+              ],
+            );
+          },
         }}
       />
     </Drawer>

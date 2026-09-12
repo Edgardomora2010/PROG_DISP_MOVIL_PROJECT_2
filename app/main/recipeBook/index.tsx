@@ -1,9 +1,7 @@
-import { Text, View } from "react-native";
+/* Importación del componente catálogo de recetas */
+import RecipeComponent from "../../../components/recipeComponent";
 
-export default function RecipeBooksScreen() {
-  return (
-    <View>
-      <Text>Recipe Books</Text>
-    </View>
-  );
+/* Componente principal de la sección de recetas */
+export default function RecipeBook() {
+  return <RecipeComponent />;
 }

@@ -1,6 +1,5 @@
 /* Importación del componente Tabs de Expo Router */
 import { Tabs } from "expo-router";
-
 /* Importación de iconos */
 import { Ionicons } from "@expo/vector-icons";
 
