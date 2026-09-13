@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { componentStyles } from "../../styles/components";
 /* Importación de Alert de React Native */
 import { router } from "expo-router";
-import { Alert } from "react-native";
+import { Alert, Text } from "react-native";
 
 /* Componente de diseño de la aplicación */
 export default function MainLayout() {
@@ -27,6 +27,7 @@ export default function MainLayout() {
 
         /* Color de la opción seleccionada */
         drawerActiveTintColor: "#F4D06F",
+        drawerInactiveTintColor: "#5C4033",
         drawerActiveBackgroundColor: "#6B4F3A",
       }}
     >
@@ -43,8 +44,15 @@ export default function MainLayout() {
         listeners={{
           drawerItemPress: (event) => {
             event.preventDefault();
-            router.replace("../main/tabs/index");
+            router.replace("../main/tabs");
           },
+        }}
+      />
+
+      <Drawer.Screen
+        name="index"
+        options={{
+          drawerItemStyle: { display: "none" },
         }}
       />
 
@@ -65,7 +73,18 @@ export default function MainLayout() {
         name="about"
         options={{
           title: "Acerca de",
-          drawerLabel: "Acerca de",
+          drawerLabel: ({ focused }) => (
+            <Text
+              style={[
+                componentStyles.drawerLabelStyle,
+                {
+                  color: focused ? "#F4D06F" : "#5C4033",
+                },
+              ]}
+            >
+              Acerca de Medieval Recipe Collection v.1.0
+            </Text>
+          ),
           drawerIcon: ({ color, size }) => (
             <Ionicons
               name="information-circle-outline"

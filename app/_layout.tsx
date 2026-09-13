@@ -1,7 +1,15 @@
-/* Importación de Stack de Expo Router */
+/* Importación del componente Stack desde el paquete expo-router */
 import { Stack } from "expo-router";
+import { useMedievalFonts } from "../styles/fonts";
 
-/* Componente de diseño raíz */
+/* Componente principal de la aplicación que se encarga de cargar
+ las fuentes */
 export default function RootLayout() {
+  const [fontsLoaded] = useMedievalFonts();
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return <Stack screenOptions={{ headerShown: false }} />;
 }

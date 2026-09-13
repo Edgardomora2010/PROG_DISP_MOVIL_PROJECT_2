@@ -17,6 +17,7 @@ import { router } from "expo-router";
 import { componentStyles } from "../styles/components";
 /* Importación del tipo Recipe */
 import { Recipe } from "../lib/api/types";
+/* Importación de useFonts para cargar fuentes personalizadas */
 
 /* Componente para mostrar el detalle de una receta */
 export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
@@ -37,12 +38,24 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
         contentContainerStyle={componentStyles.recipeDetailsContent}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={componentStyles.recipeDetailsTitle}>{recipe.title}</Text>
+        {/* Encabezado de la receta */}
+        <View style={componentStyles.recipeDetailsHeader}>
+          <Text
+            style={{
+              fontFamily: "OldeEnglish",
+              fontSize: 50,
+              color: "#fbf7f3",
+            }}
+          >
+            {recipe.title}
+          </Text>
 
-        <Text style={componentStyles.recipeDetailsOriginalTitle}>
-          {recipe.title_en}
-        </Text>
+          <Text style={componentStyles.recipeDetailsOriginalTitle}>
+            {recipe.title_en}
+          </Text>
+        </View>
 
+        {/* Ingredientes e imagen */}
         <View style={componentStyles.recipeIngredientsCard}>
           <View style={componentStyles.recipeIngredientsContent}>
             <Text style={componentStyles.recipeSectionTitle}>Ingredientes</Text>
@@ -68,6 +81,7 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
           )}
         </View>
 
+        {/* Preparación */}
         <View style={componentStyles.recipeDetailsCard}>
           <Text style={componentStyles.recipeSectionTitle}>Preparación</Text>
 
@@ -76,6 +90,7 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
           </Text>
         </View>
 
+        {/* Contexto histórico */}
         <View style={componentStyles.recipeDetailsCard}>
           <Text style={componentStyles.recipeSectionTitle}>
             Contexto histórico
@@ -90,6 +105,7 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
           </Text>
         </View>
 
+        {/* Fuente */}
         <View style={componentStyles.recipeDetailsCard}>
           <Text style={componentStyles.recipeSectionTitle}>Fuente</Text>
 
@@ -106,7 +122,17 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
           </Text>
         </View>
 
+        {/* Acciones del detalle */}
         <View style={componentStyles.recipeDetailsActions}>
+          <Pressable
+            style={componentStyles.recipeDetailsAction}
+            onPress={() => router.back()}
+          >
+            <Ionicons name="arrow-back-outline" size={25} color="#6B4F3A" />
+
+            <Text style={componentStyles.recipeDetailsActionText}>Volver</Text>
+          </Pressable>
+
           <Pressable
             style={componentStyles.recipeDetailsAction}
             onPress={() => setIsFavorite(!isFavorite)}
@@ -118,17 +144,8 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
             />
 
             <Text style={componentStyles.recipeDetailsActionText}>
-              {isFavorite ? "Favorita" : "Favorito"}
+              {isFavorite ? "Favorita" : "Registrar"}
             </Text>
-          </Pressable>
-
-          <Pressable
-            style={componentStyles.recipeDetailsAction}
-            onPress={() => router.back()}
-          >
-            <Ionicons name="arrow-back-outline" size={25} color="#6B4F3A" />
-
-            <Text style={componentStyles.recipeDetailsActionText}>Volver</Text>
           </Pressable>
         </View>
       </ScrollView>

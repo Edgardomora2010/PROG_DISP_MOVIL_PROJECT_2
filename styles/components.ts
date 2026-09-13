@@ -127,9 +127,10 @@ export const componentStyles = StyleSheet.create({
 
   /* Estilo del texto de las opciones del menú */
   drawerLabelStyle: {
-    /* color: "#5C4033", */
     fontSize: 16,
     fontWeight: "bold",
+    flexShrink: 1,
+    /*color: "#5C4033",*/
   },
 
   /* Espacio y forma de las opciones del menú */
@@ -191,18 +192,22 @@ export const componentStyles = StyleSheet.create({
 
   recipeLabel: {
     flex: 1,
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 30,
+    /* fontWeight: "bold",  fuentes personalizadas medievales 
+    no funcionan con la propiedad bold asignada originalmente 
+    para hoja de estilos */
     color: "#5C4033",
+    fontFamily: "OldeEnglish",
     marginHorizontal: 14,
   },
 
   recipeLabelPressed: {
     color: "#F4D06F",
+    fontSize: 30,
+    fontFamily: "OldeEnglish",
   },
 
   /* Estilos del pie de página del catálogo */
-
   recipeFooter: {
     width: "95%",
     alignSelf: "center",
@@ -247,19 +252,19 @@ export const componentStyles = StyleSheet.create({
 
   /* Encabezado de la receta */
   recipeDetailsHeader: {
-    backgroundColor: "rgba(245, 239, 230, 0.95)",
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: "#C8AA7A",
+    paddingHorizontal: 8,
+    paddingVertical: 10,
+    marginBottom: 8,
   },
 
   /* Título de la receta */
   recipeDetailsTitle: {
-    fontSize: 38,
-    fontWeight: "bold",
-    color: "#fbf7f3",
+    fontSize: 45,
+    fontFamily: "OldeEnglish",
+    color: "#FFF8E7",
+    textShadowColor: "#6B4F3A",
+    textShadowOffset: { width: 3, height: 3 },
+    textShadowRadius: 1,
     marginBottom: 5,
   },
 
@@ -320,7 +325,7 @@ export const componentStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "#5C4033",
-    marginBottom: 10,
+    marginBottom: 20,
   },
 
   /* Ingrediente individual */
@@ -384,5 +389,14 @@ export const componentStyles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
     color: "#6B4F3A",
+  },
+
+  /* Texto para elementos con viñetas */
+  bulletText: {
+    marginTop: 10,
+    fontSize: 13,
+    lineHeight: 19,
+    color: "#8B6F5A",
+    marginBottom: 10,
   },
 });
