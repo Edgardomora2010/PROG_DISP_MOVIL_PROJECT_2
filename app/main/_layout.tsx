@@ -56,6 +56,13 @@ export default function MainLayout() {
         }}
       />
 
+      <Drawer.Screen
+        name="history/index"
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
+
       {/* Recetas */}
       <Drawer.Screen
         name="recipeBook"

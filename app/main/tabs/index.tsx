@@ -35,7 +35,10 @@ export default function Home() {
       </Pressable>
 
       {/* Lugares */}
-      <Pressable style={componentStyles.libraryButton}>
+      <Pressable
+        style={componentStyles.libraryButton}
+        onPress={() => router.push("/main/history")}
+      >
         <Text style={componentStyles.libraryButtonText}>
           Lugares y contexto histórico
         </Text>

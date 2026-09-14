@@ -399,4 +399,112 @@ export const componentStyles = StyleSheet.create({
     color: "#8B6F5A",
     marginBottom: 10,
   },
+
+  /* ************************************************* */
+  /*              CATÁLOGO DE HISTORIA                 */
+  /* ************************************************* */
+
+  /* Encabezado del catálogo histórico */
+  historyHeader: {
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    marginBottom: 10,
+  },
+
+  /* Espacio reservado para el mapa medieval */
+  historyMapPlaceholder: {
+    width: "100%",
+    height: 250,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+
+  /* Texto del espacio reservado para el mapa */
+  historyMapText: {
+    marginTop: 8,
+    fontSize: 14,
+    color: "#8B6F5A",
+  },
+
+  /* Contenedor de la lista de lugares */
+  historyListContainer: {
+    flex: 1,
+  },
+
+  /* Lista de lugares */
+  historyList: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+
+  /* Tarjeta de un lugar histórico */
+  historyItem: {
+    backgroundColor: "rgba(255, 253, 248, 0.90)",
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 14,
+    borderWidth: 2,
+    borderColor: "#77520d",
+  },
+
+  /* Imagen del lugar histórico */
+  historyImage: {
+    width: "100%",
+    height: 150,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+  },
+
+  /* Espacio temporal para la imagen */
+  historyImagePlaceholder: {
+    width: "100%",
+    height: 150,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+    backgroundColor: "#E8D7BD",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 12,
+  },
+
+  /* Texto del espacio temporal de imagen */
+  historyImageText: {
+    marginTop: 5,
+    fontSize: 12,
+    color: "#8B6F5A",
+  },
+
+  /* Nombre del lugar */
+  historyTitle: {
+    fontSize: 28,
+    fontFamily: "OldeEnglish",
+    color: "#5C4033",
+    marginBottom: 8,
+  },
+
+  /* Descripción del lugar */
+  historyDescription: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: "#6D5141",
+    marginBottom: 10,
+  },
+
+  /* Contexto histórico del lugar */
+  historyContext: {
+    fontSize: 14,
+    lineHeight: 20,
+    color: "#6D5141",
+    marginBottom: 10,
+  },
+
+  /* Coordenadas del lugar */
+  historyCoordinates: {
+    fontSize: 13,
+    lineHeight: 19,
+    color: "#8B6F5A",
+  },
 });

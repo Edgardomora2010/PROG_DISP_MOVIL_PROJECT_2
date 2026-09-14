@@ -35,3 +35,15 @@ export interface State<T> {
   loading: boolean;
   error: string | null;
 }
+
+/* Se define un tipo de datos para representar un lugar histórico */
+export interface Place {
+  id: number;
+  created_at: string;
+  name: string;
+  description: string;
+  historical_context: string;
+  latitude: number | null;
+  longitude: number | null;
+  image_place_url: string | null;
+}
