@@ -164,12 +164,12 @@ export const componentStyles = StyleSheet.create({
     /* flex: 1,*/
     width: "98%",
     height: "80%",
-    paddingTop: 60,
+    paddingTop: 40,
   },
 
   recipeList: {
     paddingHorizontal: 20,
-    paddingTop: 60,
+    paddingTop: 0,
     paddingBottom: 20,
   },
 
@@ -246,15 +246,16 @@ export const componentStyles = StyleSheet.create({
 
   /* Contenido desplazable del detalle */
   recipeDetailsContent: {
-    padding: 20,
-    paddingBottom: 30,
+    paddingHorizontal: 10,
+    paddingVertical: 40,
+    paddingBottom: 20,
   },
 
   /* Encabezado de la receta */
   recipeDetailsHeader: {
-    paddingHorizontal: 8,
     paddingVertical: 10,
     marginBottom: 8,
+    paddingHorizontal: 0,
   },
 
   /* Título de la receta */
@@ -406,9 +407,13 @@ export const componentStyles = StyleSheet.create({
 
   /* Encabezado del catálogo histórico */
   historyHeader: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
     paddingVertical: 10,
     marginBottom: 10,
+  },
+
+  historyActions: {
+  marginHorizontal: 10,
   },
 
   /* Espacio reservado para el mapa medieval */
@@ -434,8 +439,9 @@ export const componentStyles = StyleSheet.create({
 
   /* Lista de lugares */
   historyList: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingBottom: 20,
+    paddingTop: 0,
   },
 
   /* Tarjeta de un lugar histórico */

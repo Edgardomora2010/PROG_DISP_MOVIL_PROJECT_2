@@ -1,12 +1,13 @@
 /* Importación de componentes de React Native */
 import { Pressable, Text, View } from "react-native";
-
 /* Importación de navegación */
 import { router } from "expo-router";
-
 /* Importación de estilos */
 import { componentStyles } from "../../../styles/components";
+/* Importación de estilos de layout */
 import { layoutStyles } from "../../../styles/layout";
+
+/* PANTALLA DE INICIO (HOME) */
 
 /* Componente de la pantalla de inicio */
 export default function Home() {
@@ -18,23 +19,49 @@ export default function Home() {
         Explora y descubre la cocina medieval
       </Text>
 
-      {/* Ver recetas */}
+      {/* VER RECETAS MEDIEVALES - (API) */}
       <Pressable
         style={componentStyles.libraryButton}
-        onPress={() => router.push("/main/recipeBook")}
+        onPress={() =>
+          router.push({
+            pathname: "/main/recipeBook",
+            params: {
+              context: "medieval",
+            },
+          })
+        }
       >
         <Text style={componentStyles.libraryButtonText}>Ver recetas</Text>
       </Pressable>
 
-      {/* Crear receta */}
+      {/* AGREGAR RECETA PROPIA - (SQLITE) */}
       <Pressable
         style={componentStyles.libraryButton}
         onPress={() => router.push("/main/recipeBook/newRecipe")}
       >
-        <Text style={componentStyles.libraryButtonText}>Crear receta</Text>
+        <Text style={componentStyles.libraryButtonText}>
+          Agregar receta propia
+        </Text>
       </Pressable>
 
-      {/* Lugares */}
+      {/* VER MIS RECETAS PROPIAS - (SQLITE) */}
+      <Pressable
+        style={componentStyles.libraryButton}
+        onPress={() =>
+          router.push({
+            pathname: "/main/recipeBook",
+            params: {
+              context: "modern",
+            },
+          })
+        }
+      >
+        <Text style={componentStyles.libraryButtonText}>
+          Ver mis recetas
+        </Text>
+      </Pressable>
+
+      {/* VER HISTORIA Y LUGARES - (API) */}
       <Pressable
         style={componentStyles.libraryButton}
         onPress={() => router.push("/main/history")}

@@ -4,6 +4,9 @@ import { ImageBackground, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 /* Importación de estilos */
 import { componentStyles } from "../../../styles/components";
+
+/* PANTALLA DE CONFIGURACIÓN DE APLICACION */
+
 /* Componente principal de configuración */
 export default function Settings() {
   return (

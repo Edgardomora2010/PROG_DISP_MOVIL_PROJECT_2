@@ -5,6 +5,8 @@ import { Ionicons } from "@expo/vector-icons";
 /* Importación de estilos */
 import { componentStyles } from "../../../styles/components";
 
+/* PANTALLA DE CUENTA DE USUARIO */
+
 /* Componente principal de la cuenta */
 export default function Account() {
   return (

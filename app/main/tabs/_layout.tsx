@@ -3,6 +3,8 @@ import { Tabs } from "expo-router";
 /* Importación de iconos */
 import { Ionicons } from "@expo/vector-icons";
 
+/* TAB NAVIGATION LAYOUT (PESTAÑAS INFERIORES DE LA APLICACIÓN) */
+
 /* Componente de diseño para la navegación por pestañas */
 export default function TabsLayout() {
   return (

@@ -1,7 +1,7 @@
 /* Importaciones de React */
 import { useEffect, useState } from "react";
 /* Importaciones de React Native */
-import { FlatList, Image, ImageBackground, Text, View } from "react-native";
+import { FlatList, Image, ImageBackground, Pressable, Text, View } from "react-native";
 /* Importación de iconos */
 import { Ionicons } from "@expo/vector-icons";
 /* Importación del servicio de lugares */
@@ -10,6 +10,9 @@ import { placeService } from "../../../services/placeServices";
 import { componentStyles } from "../../../styles/components";
 /* Importación del tipo Place */
 import { Place } from "../../../lib/api/types";
+import { router } from "expo-router";
+
+/* PANTALLA DE HISTORIA Y LUGARES */
 
 /* Componente principal del catálogo histórico */
 export default function History() {
@@ -98,8 +101,56 @@ export default function History() {
               </Text>
             </View>
           )}
+
         />
-      </View>
+        
+        {/* Acciones de historia */}
+        <View style={[
+          componentStyles.recipeDetailsActions,
+          componentStyles.historyActions,
+          ]}
+          >
+            
+          <Pressable
+          style={componentStyles.recipeDetailsAction}
+          onPress={() => router.back()}
+          >
+            <Ionicons
+            name="arrow-back-outline"
+            size={25}
+            color="#6B4F3A"
+            />
+            
+            <Text style={componentStyles.recipeDetailsActionText}>
+              Volver
+              </Text>
+              </Pressable>
+              
+              <Pressable
+              style={componentStyles.recipeDetailsAction}
+              onPress={() =>
+                router.push({
+                  pathname: "/main/recipeBook",
+                  params: {
+                    context: "medieval",},
+                  })
+                }
+                >
+                  
+                  <Ionicons
+                  name="restaurant-outline"
+                  size={25}
+                  color="#6B4F3A"
+                  />
+                  
+                  <Text style={componentStyles.recipeDetailsActionText}>
+                    Ver recetas
+                    </Text>
+                    </Pressable>
+                    </View>
+                    
+                    </View>
+
     </ImageBackground>
   );
 }

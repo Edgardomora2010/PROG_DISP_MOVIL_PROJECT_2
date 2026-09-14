@@ -8,6 +8,8 @@ import { componentStyles } from "../../styles/components";
 import { router } from "expo-router";
 import { Alert, Text } from "react-native";
 
+/* OPCIONES DE PANEL DE MENU LATERAL (DRAWER) */
+
 /* Componente de diseño de la aplicación */
 export default function MainLayout() {
   return (

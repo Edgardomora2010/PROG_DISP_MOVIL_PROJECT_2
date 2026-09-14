@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { FlatList, ImageBackground, Pressable, Text, View } from "react-native";
 import { recipeService } from "../services/recipeServices";
 import { componentStyles } from "../styles/components";
+import { RecipeContext } from "./recipeContext";
 
 /* Componente funcional RecipeComponent que representa la pantalla de
  recetas */
-export default function RecipeComponent() {
+export default function RecipeComponent({ context }: RecipeContext) {
   /*  Datos de prueba para la lista de recetas, se pueden reemplazar
    por datos obtenidos de una API o base de datos 
   const recipes = [
@@ -24,12 +25,26 @@ export default function RecipeComponent() {
 
   /* useEffect para cargar las recetas al montar el componente */
   useEffect(() => {
-    const loadRecipes = async () => {
+  const loadRecipes = async () => {
+
+
+     /* Limpia las recetas anteriores al cambiar de contexto */
+    setRecipes([]);
+
+    /* Si el contexto es medieval, se obtienen las recetas desde la API */
+    if (context === "medieval") {
       const data = await recipeService.getRecipes();
       setRecipes(data);
-    };
-    loadRecipes();
-  }, []);
+    }
+
+    /* Si el contexto es modern, se obtienen las recetas desde SQLite */
+    if (context === "modern") {
+      /* TODO: cargar recetas desde SQLite */
+    }
+  };
+
+  loadRecipes();
+}, [context]);
 
   return (
     /* Se utiliza un fondo de madera para la pantalla de recetas */
@@ -58,7 +73,14 @@ export default function RecipeComponent() {
                   componentStyles.recipeItem,
                   pressed && componentStyles.recipeItemPressed,
                 ]}
-                onPress={() => router.push(`/main/recipeBook/${item.id}`)}
+
+                onPress={() =>
+                  router.push({
+                  pathname: "/main/recipeBook/[id]",
+                  params: {
+                    id: item.id.toString(),
+                    context: context,},})
+                  }
               >
                 {({ pressed }) => (
                   <>
