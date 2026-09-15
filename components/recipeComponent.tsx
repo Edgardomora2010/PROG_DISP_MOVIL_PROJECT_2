@@ -2,14 +2,21 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
-import { FlatList, ImageBackground, Pressable, Text, View } from "react-native";
+import { FlatList, ImageBackground, Pressable, Text, View, Alert } from "react-native";
 import { recipeService } from "../services/recipeServices";
 import { componentStyles } from "../styles/components";
 import { RecipeContext } from "./recipeContext";
+/* Importación del hook para operaciones CRUD de recetas */
+import { useRecipeCRUD } from "../hooks/useRecipeCRUD";
+
 
 /* Componente funcional RecipeComponent que representa la pantalla de
  recetas */
 export default function RecipeComponent({ context }: RecipeContext) {
+  
+/* Hook para operaciones CRUD de recetas */
+const { readAllRecipes, deleteRecipe } = useRecipeCRUD();
+
   /*  Datos de prueba para la lista de recetas, se pueden reemplazar
    por datos obtenidos de una API o base de datos 
   const recipes = [
@@ -39,12 +46,43 @@ export default function RecipeComponent({ context }: RecipeContext) {
 
     /* Si el contexto es modern, se obtienen las recetas desde SQLite */
     if (context === "modern") {
-      /* TODO: cargar recetas desde SQLite */
+      /* Cargar recetas desde SQLite */
+       const data = await readAllRecipes();
+       setRecipes(data);
     }
   };
 
   loadRecipes();
 }, [context]);
+
+/* Solicita confirmación antes de eliminar una receta */
+const confirmDeleteRecipe = (id: number) => {
+
+  Alert.alert(
+    "Eliminar receta",
+    "¿Desea eliminar esta receta?",
+    [
+      {
+        text: "Cancelar",
+        style: "cancel",
+      },
+      {
+        text: "Eliminar",
+        style: "destructive",
+        onPress: async () => {
+
+          /* Elimina la receta de SQLite */
+          await deleteRecipe(id);
+
+          /* Elimina la receta de la lista mostrada */
+          setRecipes((currentRecipes) =>
+            currentRecipes.filter((recipe) => recipe.id !== id)
+          );
+        },
+      },
+    ]
+  );
+};
 
   return (
     /* Se utiliza un fondo de madera para la pantalla de recetas */
@@ -91,19 +129,36 @@ export default function RecipeComponent({ context }: RecipeContext) {
                     />
 
                     <Text
-                      style={[
-                        componentStyles.recipeLabel,
-                        pressed && componentStyles.recipeLabelPressed,
+                    style={[
+                      componentStyles.recipeLabel,
+                      pressed && componentStyles.recipeLabelPressed,
                       ]}
-                    >
-                      {item.title}
-                    </Text>
-
-                    <Ionicons
-                      name="chevron-forward-outline"
-                      size={24}
-                      color={pressed ? "#F4D06F" : "#6B4F3A"}
-                    />
+                      >
+                        
+                        {item.title}
+                        </Text>
+                        
+                        {/* Botón para eliminar recetas propias almacenadas en SQLite */}
+                        {context === "modern" && (
+                          <Pressable
+                          style={componentStyles.recipeDeleteButton}
+                          onPress={(event) => {
+                            event.stopPropagation();
+                            confirmDeleteRecipe(item.id);
+                          }}
+                          >
+                            <Ionicons
+                            name="trash-outline"
+                            size={18}
+                            color="#FFFFFF"
+                            />
+                            </Pressable>
+                          )}
+                          <Ionicons
+                          name="chevron-forward-outline"
+                          size={24}
+                          color={pressed ? "#F4D06F" : "#6B4F3A"}
+                          />      
                   </>
                 )}
               </Pressable>

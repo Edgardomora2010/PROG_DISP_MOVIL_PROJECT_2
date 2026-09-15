@@ -115,6 +115,18 @@ export const componentStyles = StyleSheet.create({
     fontWeight: "bold",
   },
 
+  /* Botón pequeño para eliminar recetas propias */
+  recipeDeleteButton: {
+    width: 40,
+    height: 32,
+    textAlign: "left",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 6,
+     borderRadius: 6,
+     backgroundColor: "#8B2E2E",
+},
+
   /* ************************************************* */
   /*                 MENÚ DE NAVEGACIÓN                */
   /* ************************************************* */
@@ -513,4 +525,120 @@ export const componentStyles = StyleSheet.create({
     lineHeight: 19,
     color: "#8B6F5A",
   },
+
+/* ************************************************* */
+/*              CREACIÓN DE RECETAS                  */
+/* ************************************************* */
+
+/* Contenido desplazable de creación de receta */
+newRecipeContent: {
+  paddingHorizontal: 10,
+  paddingBottom: 20,
+},
+
+/* Tarjeta utilizada para las secciones del formulario */
+newRecipeCard: {
+  backgroundColor: "rgba(255, 253, 248, 0.90)",
+  padding: 16,
+  borderRadius: 12,
+  marginBottom: 14,
+  borderWidth: 2,
+  borderColor: "#77520d",
+},
+
+/* Campo general del formulario */
+newRecipeInput: {
+  backgroundColor: "#FFFDF8",
+  borderWidth: 1,
+  borderColor: "#C8AA7A",
+  borderRadius: 8,
+  paddingHorizontal: 12,
+  paddingVertical: 10,
+  color: "#5C4033",
+  fontSize: 15,
+},
+
+/* Fila para agregar un ingrediente */
+newRecipeIngredientRow: {
+  flexDirection: "row",
+  alignItems: "center",
+  marginBottom: 12,
+},
+
+/* Campo para escribir un ingrediente */
+newRecipeIngredientInput: {
+  flex: 1,
+  backgroundColor: "#FFFDF8",
+  borderWidth: 1,
+  borderColor: "#C8AA7A",
+  borderRadius: 8,
+  paddingHorizontal: 12,
+  paddingVertical: 10,
+  color: "#5C4033",
+  fontSize: 15,
+},
+
+/* Botón para agregar un ingrediente */
+newRecipeAddButton: {
+  backgroundColor: "#6B4F3A",
+  marginLeft: 8,
+  width: 45,
+  height: 45,
+  borderRadius: 8,
+  alignItems: "center",
+  justifyContent: "center",
+},
+
+/* Contenedor donde se muestran los ingredientes agregados */
+newRecipeIngredientsBox: {
+  minHeight: 80,
+  backgroundColor: "#FFFDF8",
+  borderWidth: 1,
+  borderColor: "#C8AA7A",
+  borderRadius: 8,
+  padding: 12,
+},
+
+/* Texto mostrado cuando todavía no existen ingredientes */
+newRecipeEmptyText: {
+  fontSize: 13,
+  color: "#8B6F5A",
+  fontStyle: "italic",
+},
+
+/* Campo de preparación de la receta */
+newRecipePreparationInput: {
+  minHeight: 140,
+  backgroundColor: "#FFFDF8",
+  borderWidth: 1,
+  borderColor: "#C8AA7A",
+  borderRadius: 8,
+  padding: 12,
+  color: "#5C4033",
+  fontSize: 15,
+  lineHeight: 21,
+},
+
+/* Botón para limpiar la receta */
+newRecipeClearButton: {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  paddingVertical: 12,
+  marginBottom: 5,
+  borderWidth: 1,
+  borderColor: "#C8AA7A",
+  borderRadius: 8,
+  backgroundColor: "#F5EFE6",
+},
+
+/* Texto del botón para limpiar */
+newRecipeClearButtonText: {
+  marginLeft: 7,
+  fontSize: 14,
+  fontWeight: "bold",
+  color: "#6B4F3A",
+},
+
+
 });
