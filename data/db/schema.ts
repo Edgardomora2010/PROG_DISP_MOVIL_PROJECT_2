@@ -30,3 +30,12 @@ export const favoriteList = sqliteTable("favoriteList", {
   recipe_context: text("recipe_context").notNull(),
   favorite: integer("favorite", { mode: "boolean" }).notNull().default(false),
 });
+
+/* Definición de la tabla de usuarios */
+export const users = sqliteTable("users", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  username: text("username").notNull().unique(),
+  password: text("password").notNull(),
+  status: integer("status", { mode: "boolean" }).notNull().default(true),
+  created_at: integer("created_at", { mode: "timestamp" }).notNull(),
+});

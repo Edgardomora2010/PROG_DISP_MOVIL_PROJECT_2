@@ -78,6 +78,36 @@ export const useRecipeCRUD = () => {
     return false;
   };
 
+  /* Obtiene todas las recetas favoritas según el contexto */
+  const areThereFavoriteRecipes = async (recipe_context: string) => {
+    const result = await db
+      .select()
+      .from(favoriteList)
+      .where(
+        and(
+          eq(favoriteList.recipe_context, recipe_context),
+          eq(favoriteList.favorite, true),
+        ),
+      );
+
+    if (result.length > 0) {
+      return true;
+    }
+
+    return false;
+  };
+
+  /* Obtiene todas las recetas guardadas como favoritas */
+  const getAllFavoriteRecipes = async () => {
+    return await db
+      .select({
+        recipe_id: favoriteList.recipe_id,
+        recipe_context: favoriteList.recipe_context,
+      })
+      .from(favoriteList)
+      .where(eq(favoriteList.favorite, true));
+  };
+
   /* Actualizar o insertar una receta a la tabla/lista de favoritos */
   const updateOrInsertFavoriteRecipe = async (
     recipe_id: number,
@@ -115,5 +145,7 @@ export const useRecipeCRUD = () => {
     recipeExist,
     updateOrInsertFavoriteRecipe,
     isFavoriteRecipe,
+    areThereFavoriteRecipes,
+    getAllFavoriteRecipes,
   };
 };

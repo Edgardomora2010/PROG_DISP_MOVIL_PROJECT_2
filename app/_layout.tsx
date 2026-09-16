@@ -1,19 +1,28 @@
 /* Importación del componente Stack desde el paquete expo-router */
-import { Stack } from "expo-router";
-import { useMedievalFonts } from "../styles/fonts";
 import { init_DB_TablesCreation } from "@/data/db/dbTableCreation";
+import { Stack } from "expo-router";
+import { useEffect } from "react";
+import { useMedievalFonts } from "../styles/fonts";
 
 /* Componente principal de la aplicación que se encarga de cargar
  las fuentes */
 export default function RootLayout() {
   const [fontsLoaded] = useMedievalFonts();
 
+  useEffect(() => {
+    /* Elimina las tablas para reconstruir la base de datos */
+    // Mantener comentada esta línea durante el desarrollo
+    // para evitar la eliminación accidental de las tablas.
+
+    // delete_DB_Tables();
+
+    /* Crea nuevamente las tablas */
+    init_DB_TablesCreation();
+  }, []);
+
   if (!fontsLoaded) {
     return null;
   }
-
-  /* Inicializa la creación inicial de tablas de la base de datos local */
-  init_DB_TablesCreation();
 
   return <Stack screenOptions={{ headerShown: false }} />;
 }

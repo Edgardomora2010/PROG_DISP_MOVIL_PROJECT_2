@@ -28,17 +28,34 @@ export const init_DB_TablesCreation = () => {
 
   /* Creación de la tabla de recetas favoritas */
   expoDb.execSync(`
-  CREATE TABLE IF NOT EXISTS favoriteList (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    recipe_id INTEGER NOT NULL,
-    recipe_context TEXT NOT NULL,
-    favorite INTEGER NOT NULL DEFAULT 0
-  );
-`);
+    CREATE TABLE IF NOT EXISTS favoriteList (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      recipe_id INTEGER NOT NULL,
+      recipe_context TEXT NOT NULL,
+      favorite INTEGER NOT NULL DEFAULT 0
+    );
+  `);
 
-  /* Eliminación de la tabla de recetas favoritas, se requiere borrar 
-  por pruebas en tablas de base de datos, y campos que no estaban completos */
-  // expoDb.execSync(`
-  // DROP TABLE IF EXISTS favoriteList/recipes/sources;
-  // `);
+  /* Creación de la tabla de usuarios */
+  expoDb.execSync(`
+    CREATE TABLE IF NOT EXISTS users (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      username TEXT NOT NULL UNIQUE,
+      password TEXT NOT NULL,
+      status INTEGER NOT NULL DEFAULT 1,
+      created_at INTEGER NOT NULL
+    );
+  `);
+};
+
+/* Elimina todas las tablas de la base de datos local.
+   Función utilizada durante el desarrollo, ya que se tuvo
+   que realizar varios cambios en la estructura de las tablas. */
+export const delete_DB_Tables = () => {
+  expoDb.execSync(`
+    DROP TABLE IF EXISTS favoriteList;
+    DROP TABLE IF EXISTS sources;
+    DROP TABLE IF EXISTS recipes;
+    DROP TABLE IF EXISTS users;
+  `);
 };
