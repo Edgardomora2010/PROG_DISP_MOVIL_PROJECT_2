@@ -1,5 +1,5 @@
 /* Importaciones de React */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 /* Importaciones de React Native */
 import {
     Image,
@@ -17,7 +17,10 @@ import { router } from "expo-router";
 import { componentStyles } from "../styles/components";
 /* Importación del tipo Recipe */
 import { Recipe } from "../lib/api/types";
-/* Importación de useFonts para cargar fuentes personalizadas */
+/* Importación del hook para operaciones CRUD de recetas */
+import { useRecipeCRUD } from "@/hooks/useRecipeCRUD";
+
+/* PANTALLA PARA MOSTRAR EL DETALLE DE UNA RECETA */
 
 /* Componente para mostrar el detalle de una receta */
 export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
@@ -26,6 +29,37 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
 
   /* Separar los ingredientes utilizando el punto y coma */
   const ingredients = recipe.ingredients.split(";");
+
+  /* Obtiene datos relevantes de la receta */
+  const recipeType = recipe.recipe_context;
+  const recipeId = recipe.id;
+  const recipeFavoriteStatus = isFavorite;
+
+  /* Obtiene las operaciones CRUD de recetas */
+  const { updateOrInsertFavoriteRecipe } = useRecipeCRUD();
+  const { isFavoriteRecipe } = useRecipeCRUD();
+
+  /* useEffect para verificar el estado de favorito al montar el componente */
+  useEffect(() => {
+    const checkFavoriteStatus = async () => {
+      const favoriteStatus = await isFavoriteRecipe(recipeId, recipeType);
+      setIsFavorite(favoriteStatus);
+    };
+    checkFavoriteStatus();
+  }, []);
+
+  /* Guarda lista de recetas favoritas en la base de datos */
+  const saveInDB = async () => {
+    try {
+      /* Guarda la receta mediante el hook de operaciones CRUD */
+      await updateOrInsertFavoriteRecipe(recipeId, recipeType);
+
+      return true;
+    } catch (error) {
+      console.error("Error al guardar la receta en la base de datos:", error);
+      return false;
+    }
+  };
 
   return (
     <ImageBackground
@@ -50,9 +84,12 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
             {recipe.title}
           </Text>
 
-          <Text style={componentStyles.recipeDetailsOriginalTitle}>
-            {recipe.title_en}
-          </Text>
+          {/* Muestra el título original solamente si existe */}
+          {recipe.title_en && (
+            <Text style={componentStyles.recipeDetailsOriginalTitle}>
+              {recipe.title_en}
+            </Text>
+          )}
         </View>
 
         {/* Ingredientes e imagen */}
@@ -91,36 +128,57 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
         </View>
 
         {/* Contexto histórico */}
-        <View style={componentStyles.recipeDetailsCard}>
-          <Text style={componentStyles.recipeSectionTitle}>
-            Contexto histórico
-          </Text>
+        {(recipe.history || recipe.period) && (
+          <View style={componentStyles.recipeDetailsCard}>
+            <Text style={componentStyles.recipeSectionTitle}>
+              Contexto histórico
+            </Text>
 
-          <Text style={componentStyles.recipeDetailsText}>
-            {recipe.history}
-          </Text>
+            {/* Muestra el contexto histórico solamente si existe */}
+            {recipe.history && (
+              <Text style={componentStyles.recipeDetailsText}>
+                {recipe.history}
+              </Text>
+            )}
 
-          <Text style={componentStyles.recipeSourceText}>
-            Período: {recipe.period}
-          </Text>
-        </View>
+            {/* Muestra el período solamente si existe */}
+            {recipe.period && (
+              <Text style={componentStyles.recipeSourceText}>
+                Período: {recipe.period}
+              </Text>
+            )}
+          </View>
+        )}
 
         {/* Fuente */}
-        <View style={componentStyles.recipeDetailsCard}>
-          <Text style={componentStyles.recipeSectionTitle}>Fuente</Text>
+        {(recipe.source_name ||
+          recipe.source_author ||
+          recipe.source_reference) && (
+          <View style={componentStyles.recipeDetailsCard}>
+            <Text style={componentStyles.recipeSectionTitle}>Fuente</Text>
 
-          <Text style={componentStyles.recipeSourceText}>
-            {recipe.source_name}
-          </Text>
+            {/* Muestra el nombre de la fuente solamente si existe */}
+            {recipe.source_name && (
+              <Text style={componentStyles.recipeSourceText}>
+                {recipe.source_name}
+              </Text>
+            )}
 
-          <Text style={componentStyles.recipeSourceText}>
-            Autor: {recipe.source_author}
-          </Text>
+            {/* Muestra el autor solamente si existe */}
+            {recipe.source_author && (
+              <Text style={componentStyles.recipeSourceText}>
+                Autor: {recipe.source_author}
+              </Text>
+            )}
 
-          <Text style={componentStyles.recipeSourceText}>
-            Referencia: {recipe.source_reference}
-          </Text>
-        </View>
+            {/* Muestra la referencia solamente si existe */}
+            {recipe.source_reference && (
+              <Text style={componentStyles.recipeSourceText}>
+                Referencia: {recipe.source_reference}
+              </Text>
+            )}
+          </View>
+        )}
 
         {/* Acciones del detalle */}
         <View style={componentStyles.recipeDetailsActions}>
@@ -135,7 +193,13 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
 
           <Pressable
             style={componentStyles.recipeDetailsAction}
-            onPress={() => setIsFavorite(!isFavorite)}
+            onPress={async () => {
+              const saved = await saveInDB();
+
+              if (saved) {
+                setIsFavorite(!isFavorite);
+              }
+            }}
           >
             <Ionicons
               name={isFavorite ? "heart" : "heart-outline"}

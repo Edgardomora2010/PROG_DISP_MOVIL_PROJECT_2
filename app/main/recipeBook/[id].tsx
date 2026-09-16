@@ -11,27 +11,80 @@ import RecipeDetails from "../../../components/recipeDetailComponent";
 import { Recipe } from "../../../lib/api/types";
 /* Importación de estilos */
 import { layoutStyles } from "../../../styles/layout";
+/* Importación del hook para operaciones CRUD de recetas */
+import { useRecipeCRUD } from "../../../hooks/useRecipeCRUD";
 
 /* Componente principal del detalle de la receta */
 export default function RecipeDetailScreen() {
-  /* Obtiene el ID de la receta desde la ruta */
-  const { id } = useLocalSearchParams<{ id: string }>();
+
+  /* Obtiene el ID y el contexto de la receta desde la ruta */
+  const { id, context } = useLocalSearchParams<{
+    id: string;
+    context: "medieval" | "modern";
+  }>();
+
   /* Estado para almacenar la receta */
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   /* Estado para controlar la carga */
   const [loading, setLoading] = useState(true);
-  /* Estado para almacenar posibles errores */
+  /* Estado para controlar errores */
   const [error, setError] = useState<string | null>(null);
-
-  /* Obtiene la receta desde la API cuando cambia el ID */
+  /* Obtiene la función para leer una receta local */
+  const { readOneRecipe } = useRecipeCRUD();
+  /* Carga la receta según su origen */
   useEffect(() => {
+
     const loadRecipe = async () => {
       try {
+
         setLoading(true);
         setError(null);
 
-        const data = await recipeService.getRecipeById(Number(id));
-        setRecipe(data);
+        /* Si el contexto es medieval, obtiene la receta desde el API */
+        if (context === "medieval") {
+          const data = await recipeService.getRecipeById(Number(id));
+          setRecipe(data);
+        }
+
+        /* Si el contexto es moderno, obtiene la receta desde SQLite */
+        if (context === "modern") {
+          const data = await readOneRecipe(Number(id));
+
+          if (data.length > 0) {
+
+            /* Obtiene la receta local */
+            const localRecipe = data[0];
+
+            /* Adapta la receta local a la definición completa de Recipe */
+            const adaptedRecipe: Recipe = {
+              id: localRecipe.id,
+              created_at: "",
+              title: localRecipe.title,
+              title_en: "",
+              place: "",
+              period: "",
+              history: "",
+              ingredients: localRecipe.ingredients,
+              preparation: localRecipe.preparation,
+              source_name: "",
+              source_author: "",
+              source_reference: "",
+              source_url: "",
+              latitude: null,
+              longitude: null,
+              source_id: null,
+              place_id: null,
+              image_url: null,
+              recipe_context: "modern",
+            };
+
+            setRecipe(adaptedRecipe);
+
+          } else {
+            setRecipe(null);
+          }
+        }
+
       } catch (error) {
         setError("No se pudo obtener la receta.");
       } finally {
@@ -40,19 +93,19 @@ export default function RecipeDetailScreen() {
     };
 
     loadRecipe();
-  }, [id]);
 
-  /* Muestra un indicador mientras se obtiene la receta */
+  }, [id, context]);
+
+  /* Muestra indicador mientras carga la receta */
   if (loading) {
     return (
       <View style={layoutStyles.container}>
         <ActivityIndicator size="large" />
-        <Text>Cargando receta...</Text>
       </View>
     );
   }
 
-  /* Muestra el mensaje si ocurre un error */
+  /* Muestra mensaje de error */
   if (error) {
     return (
       <View style={layoutStyles.container}>
@@ -61,14 +114,15 @@ export default function RecipeDetailScreen() {
     );
   }
 
-  /* Muestra el detalle cuando la receta fue obtenida */
+  /* Muestra mensaje si no se encontró la receta */
   if (!recipe) {
     return (
       <View style={layoutStyles.container}>
-        <Text>No se encontró la receta.</Text>
+        <Text>Receta no encontrada.</Text>
       </View>
     );
   }
 
+  /* Muestra el detalle de la receta */
   return <RecipeDetails recipe={recipe} />;
 }

@@ -1,22 +1,19 @@
 /* Importación de la base de datos SQLite */
 import { db } from "@/data/db/client";
 /* Importación del esquema de recetas */
-import { recipes } from "@/data/db/schema";
+import { favoriteList, recipes } from "@/data/db/schema";
 /* Importación del operador de igualdad de Drizzle ORM */
-import { eq } from "drizzle-orm";
-
+import { and, eq } from "drizzle-orm";
 
 /* HOOK PARA OPERACIONES CRUD DE RECETAS LOCALES */
 
 export const useRecipeCRUD = () => {
-
   /* Agrega una nueva receta a la base de datos */
   const addRecipe = async (
     title: string,
     ingredients: string,
-    preparation: string
+    preparation: string,
   ) => {
-
     /* Evita guardar recetas sin título */
     if (title.trim() === "") {
       return;
@@ -27,7 +24,7 @@ export const useRecipeCRUD = () => {
       return;
     }
 
-     /* Evita guardar recetas sin instrucciones de preparación */
+    /* Evita guardar recetas sin instrucciones de preparación */
     if (preparation.trim() === "") {
       return;
     }
@@ -39,32 +36,74 @@ export const useRecipeCRUD = () => {
     });
   };
 
-
   /* Elimina una receta según su ID */
   const deleteRecipe = async (id: number) => {
-
-    await db
-      .delete(recipes)
-      .where(eq(recipes.id, id));
+    await db.delete(recipes).where(eq(recipes.id, id));
   };
-
 
   /* Obtiene todas las recetas almacenadas */
   const readAllRecipes = async () => {
-
-    return await db
-      .select()
-      .from(recipes);
+    return await db.select().from(recipes);
   };
-
 
   /* Obtiene una receta según su ID */
   const readOneRecipe = async (id: number) => {
+    return await db.select().from(recipes).where(eq(recipes.id, id));
+  };
 
+  /* Revisa si una receta está en la tabla/lista de favoritos */
+  const recipeExist = async (recipe_id: number, recipe_context: string) => {
     return await db
       .select()
-      .from(recipes)
-      .where(eq(recipes.id, id));
+      .from(favoriteList)
+      .where(
+        and(
+          eq(favoriteList.recipe_id, recipe_id),
+          eq(favoriteList.recipe_context, recipe_context),
+        ),
+      );
+  };
+
+  /* Revisa si una receta está guardada como favorita */
+  const isFavoriteRecipe = async (
+    recipe_id: number,
+    recipe_context: string,
+  ) => {
+    const result = await recipeExist(recipe_id, recipe_context);
+
+    if (result.length > 0) {
+      return result[0].favorite;
+    }
+
+    return false;
+  };
+
+  /* Actualizar o insertar una receta a la tabla/lista de favoritos */
+  const updateOrInsertFavoriteRecipe = async (
+    recipe_id: number,
+    recipe_context: string,
+  ) => {
+    const result = await recipeExist(recipe_id, recipe_context);
+
+    if (result.length > 0) {
+      // Update
+      await db
+        .update(favoriteList)
+        .set({ favorite: !result[0].favorite })
+        .where(
+          and(
+            eq(favoriteList.recipe_id, recipe_id),
+            eq(favoriteList.recipe_context, recipe_context),
+          ),
+        );
+    } else {
+      // Insert
+      await db.insert(favoriteList).values({
+        recipe_id: recipe_id,
+        recipe_context: recipe_context,
+        favorite: true,
+      });
+    }
   };
 
   /* Retorna las operaciones CRUD disponibles */
@@ -73,6 +112,8 @@ export const useRecipeCRUD = () => {
     deleteRecipe,
     readAllRecipes,
     readOneRecipe,
+    recipeExist,
+    updateOrInsertFavoriteRecipe,
+    isFavoriteRecipe,
   };
-
 };

@@ -2,13 +2,13 @@
 import { useState } from "react";
 /* Importaciones de React Native */
 import {
-  Alert,
-  ImageBackground,
-  Pressable,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
+    Alert,
+    ImageBackground,
+    Pressable,
+    ScrollView,
+    Text,
+    TextInput,
+    View,
 } from "react-native";
 /* Importación de iconos */
 import { Ionicons } from "@expo/vector-icons";
@@ -19,12 +19,10 @@ import { componentStyles } from "../../../styles/components";
 /* Importación del hook para operaciones CRUD de recetas */
 import { useRecipeCRUD } from "@/hooks/useRecipeCRUD";
 
-
 /* PANTALLA PARA CREAR UNA RECETA PROPIA */
 
 /* Exportación del componente de creación de receta */
 export default function NewRecipe() {
-
   /* Estado para almacenar el título de la receta */
   const [title, setTitle] = useState("");
   /* Estado temporal para escribir un ingrediente */
@@ -34,14 +32,11 @@ export default function NewRecipe() {
   /* Estado para almacenar la preparación de la receta */
   const [preparation, setPreparation] = useState("");
 
-
   /* Obtiene las operaciones CRUD de recetas */
   const { addRecipe } = useRecipeCRUD();
 
-
   /* Agrega el ingrediente escrito a la lista de ingredientes */
   const addIngredient = () => {
-
     /* Evita agregar ingredientes vacíos */
     if (!ingredient.trim()) {
       return;
@@ -65,46 +60,31 @@ export default function NewRecipe() {
   const saveInDB = async (
     title: string,
     ingredientsText: string,
-    preparation: string
+    preparation: string,
   ) => {
-
     try {
-
       /* Guarda la receta mediante el hook de operaciones CRUD */
-      await addRecipe(
-        title,
-        ingredientsText,
-        preparation
-      );
+      await addRecipe(title, ingredientsText, preparation);
 
       return true;
-
     } catch (error) {
-
-      console.error(
-        "Error al guardar la receta en la base de datos:",
-        error
-      );
+      console.error("Error al guardar la receta en la base de datos:", error);
 
       return false;
     }
   };
 
-
   /* Guarda receta en base de datos (SQLite) */
   const saveRecipe = async () => {
-
     /* Validación de datos */
     if (!title.trim() || ingredients.length === 0 || !preparation.trim()) {
-
       Alert.alert(
         "Datos incompletos",
-        "Debe ingresar un título, al menos un ingrediente y la preparación."
+        "Debe ingresar un título, al menos un ingrediente y la preparación.",
       );
 
       return;
     }
-
 
     /* Convierte el arreglo de ingredientes en un único texto
        separado mediante punto y coma */
@@ -114,16 +94,12 @@ export default function NewRecipe() {
     const saved = await saveInDB(
       title.trim(),
       ingredientsText,
-      preparation.trim()
+      preparation.trim(),
     );
 
     /* Verifica que la receta se haya guardado correctamente */
     if (!saved) {
-
-      Alert.alert(
-        "Error",
-        "No se pudo guardar la receta."
-      );
+      Alert.alert("Error", "No se pudo guardar la receta.");
 
       return;
     }
@@ -131,10 +107,7 @@ export default function NewRecipe() {
     /* Limpia los campos después de guardar la receta */
     clearRecipe();
 
-    Alert.alert(
-      "Receta guardada",
-      "La receta fue almacenada correctamente."
-    );
+    Alert.alert("Receta guardada", "La receta fue almacenada correctamente.");
   };
 
   return (
@@ -144,25 +117,17 @@ export default function NewRecipe() {
       style={componentStyles.recipeBackground}
       resizeMode="cover"
     >
-
       {/* Contenido desplazable del formulario */}
       <ScrollView
         contentContainerStyle={componentStyles.newRecipeContent}
         showsVerticalScrollIndicator={false}
       >
-
         {/* Título de la pantalla */}
-        <Text style={componentStyles.recipeDetailsTitle}>
-          Crear receta
-        </Text>
-
+        <Text style={componentStyles.recipeDetailsTitle}>Crear receta</Text>
 
         {/* Campo para el título de receta */}
         <View style={componentStyles.newRecipeCard}>
-
-          <Text style={componentStyles.recipeSectionTitle}>
-            Título receta
-          </Text>
+          <Text style={componentStyles.recipeSectionTitle}>Título receta</Text>
 
           <TextInput
             style={componentStyles.newRecipeInput}
@@ -171,20 +136,14 @@ export default function NewRecipe() {
             placeholder="Nombre de la receta"
             placeholderTextColor="#8B6F5A"
           />
-
         </View>
-
 
         {/* Sección de ingredientes */}
         <View style={componentStyles.newRecipeCard}>
-
-          <Text style={componentStyles.recipeSectionTitle}>
-            Ingredientes
-          </Text>
+          <Text style={componentStyles.recipeSectionTitle}>Ingredientes</Text>
 
           {/* Campo para escribir un ingrediente */}
           <View style={componentStyles.newRecipeIngredientRow}>
-
             <TextInput
               style={componentStyles.newRecipeIngredientInput}
               value={ingredient}
@@ -199,49 +158,29 @@ export default function NewRecipe() {
               style={componentStyles.newRecipeAddButton}
               onPress={addIngredient}
             >
-              <Ionicons
-                name="add-outline"
-                size={25}
-                color="#F4D06F"
-              />
+              <Ionicons name="add-outline" size={25} color="#F4D06F" />
             </Pressable>
-
           </View>
-
 
           {/* Lista visual de ingredientes agregados */}
           <View style={componentStyles.newRecipeIngredientsBox}>
-
             {ingredients.length === 0 ? (
-
               <Text style={componentStyles.newRecipeEmptyText}>
                 No se han agregado ingredientes.
               </Text>
-
             ) : (
-
               ingredients.map((item, index) => (
-                <Text
-                  key={index}
-                  style={componentStyles.recipeIngredient}
-                >
+                <Text key={index} style={componentStyles.recipeIngredient}>
                   • {item}
                 </Text>
               ))
-
             )}
-
           </View>
-
         </View>
-
 
         {/* Sección de preparación */}
         <View style={componentStyles.newRecipeCard}>
-
-          <Text style={componentStyles.recipeSectionTitle}>
-            Preparación
-          </Text>
+          <Text style={componentStyles.recipeSectionTitle}>Preparación</Text>
 
           <TextInput
             style={componentStyles.newRecipePreparationInput}
@@ -252,74 +191,46 @@ export default function NewRecipe() {
             multiline
             textAlignVertical="top"
           />
-
         </View>
-
 
         {/* Botón para limpiar el formulario */}
         <Pressable
           style={componentStyles.newRecipeClearButton}
           onPress={clearRecipe}
         >
-          <Ionicons
-            name="trash-outline"
-            size={20}
-            color="#6B4F3A"
-          />
+          <Ionicons name="trash-outline" size={20} color="#6B4F3A" />
 
           <Text style={componentStyles.newRecipeClearButtonText}>
             Limpiar receta
           </Text>
         </Pressable>
 
-
         {/* Botón para guardar la receta */}
-        <Pressable
-          style={componentStyles.libraryButton}
-          onPress={saveRecipe}
-        >
-          <Text style={componentStyles.libraryButtonText}>
-            Guardar receta
-          </Text>
+        <Pressable style={componentStyles.libraryButton} onPress={saveRecipe}>
+          <Text style={componentStyles.libraryButtonText}>Guardar receta</Text>
         </Pressable>
-
 
         {/* Acciones de navegación */}
         <View style={componentStyles.recipeDetailsActions}>
-
           {/* Volver */}
           <Pressable
             style={componentStyles.recipeDetailsAction}
             onPress={() => router.back()}
           >
-            <Ionicons
-              name="arrow-back-outline"
-              size={25}
-              color="#6B4F3A"
-            />
+            <Ionicons name="arrow-back-outline" size={25} color="#6B4F3A" />
 
-            <Text style={componentStyles.recipeDetailsActionText}>
-              Volver
-            </Text>
+            <Text style={componentStyles.recipeDetailsActionText}>Volver</Text>
           </Pressable>
-
 
           {/* Inicio */}
           <Pressable
             style={componentStyles.recipeDetailsAction}
             onPress={() => router.replace("/main/tabs")}
           >
-            <Ionicons
-              name="home-outline"
-              size={25}
-              color="#6B4F3A"
-            />
+            <Ionicons name="home-outline" size={25} color="#6B4F3A" />
 
-            <Text style={componentStyles.recipeDetailsActionText}>
-              Inicio
-            </Text>
+            <Text style={componentStyles.recipeDetailsActionText}>Inicio</Text>
           </Pressable>
-
 
           {/* Mis recetas */}
           <Pressable
@@ -333,21 +244,14 @@ export default function NewRecipe() {
               })
             }
           >
-            <Ionicons
-              name="book-outline"
-              size={25}
-              color="#6B4F3A"
-            />
+            <Ionicons name="book-outline" size={25} color="#6B4F3A" />
 
             <Text style={componentStyles.recipeDetailsActionText}>
               Mis recetas
             </Text>
           </Pressable>
-
         </View>
-
       </ScrollView>
-
     </ImageBackground>
   );
 }

@@ -1,9 +1,8 @@
 /* Importación de los módulos necesarios de Drizzle ORM para definir
  el esquema de la base de datos SQLite */
-import { datetime } from "drizzle-orm/singlestore-core/columns/datetime";
 /* Importación de los módulos necesarios de Drizzle ORM para definir
  el esquema de la base de datos SQLite */
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 /* Definición de la tabla de recetas */
 export const recipes = sqliteTable("recipes", {
@@ -12,7 +11,7 @@ export const recipes = sqliteTable("recipes", {
   description: text("description"),
   ingredients: text("ingredients").notNull(),
   preparation: text("preparation").notNull(),
-  recipe_context: text("recipe_context").default("modern"), 
+  recipe_context: text("recipe_context").default("modern"),
 });
 
 /* Definición de la tabla de fuentes */
@@ -28,6 +27,6 @@ export const sources = sqliteTable("sources", {
 export const favoriteList = sqliteTable("favoriteList", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   recipe_id: integer("recipe_id").notNull(),
+  recipe_context: text("recipe_context").notNull(),
   favorite: integer("favorite", { mode: "boolean" }).notNull().default(false),
-
 });

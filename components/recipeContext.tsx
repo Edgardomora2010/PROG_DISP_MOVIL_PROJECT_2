@@ -6,7 +6,7 @@ export type RecipeContext = {
 
 /* context:medieval = source (api)    
    context:modern = source (SQLite local) */
-   context: "medieval" | "modern";
+   context: "medieval" | "modern" | "favorite";
 };
 
 /* Contexto detallado de la receta que indica la fuente y el ID de 
@@ -16,8 +16,9 @@ export type RecipeContext = {
 export type DetailedRecipeContext = {
 
 /* context:medieval = source (api)    
-   context:modern = source (SQLite local) */
-   context: "medieval" | "modern";
+   context:modern = source (SQLite local)
+   context:favorite = source (api + sqlite) */
+   context: "medieval" | "modern" | "favorite";
    id: number;
 };
 
