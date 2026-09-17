@@ -15,10 +15,11 @@ export const componentStyles = StyleSheet.create({
 
   /* Título principal */
   title: {
-    fontSize: 28,
-    fontWeight: "bold",
+    fontSize: 75,
+    /*fontWeight: "bold",*/
     color: "#5C4033",
     marginBottom: 5,
+    fontFamily: "OldeEnglish",
   },
 
   /* Subtítulo */
@@ -96,8 +97,9 @@ export const componentStyles = StyleSheet.create({
   /* Texto del botón para explorar la biblioteca */
   libraryButtonText: {
     color: "#F4D06F",
-    fontSize: 15,
-    fontWeight: "bold",
+    fontSize: 32,
+    /*fontWeight: "bold", propiedad no soportada por el font medieval */
+    fontFamily: "OldeEnglish",
   },
 
   /* Botón de inicio de sesión */
@@ -123,9 +125,9 @@ export const componentStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginLeft: 6,
-     borderRadius: 6,
-     backgroundColor: "#8B2E2E",
-},
+    borderRadius: 6,
+    backgroundColor: "#8B2E2E",
+  },
 
   /* ************************************************* */
   /*                 MENÚ DE NAVEGACIÓN                */
@@ -425,7 +427,7 @@ export const componentStyles = StyleSheet.create({
   },
 
   historyActions: {
-  marginHorizontal: 10,
+    marginHorizontal: 10,
   },
 
   /* Espacio reservado para el mapa medieval */
@@ -526,119 +528,130 @@ export const componentStyles = StyleSheet.create({
     color: "#8B6F5A",
   },
 
-/* ************************************************* */
-/*              CREACIÓN DE RECETAS                  */
-/* ************************************************* */
+  /* ************************************************* */
+  /*              CREACIÓN DE RECETAS                  */
+  /* ************************************************* */
 
-/* Contenido desplazable de creación de receta */
-newRecipeContent: {
-  paddingHorizontal: 10,
-  paddingBottom: 20,
-},
+  /* Contenido desplazable de creación de receta */
+  newRecipeContent: {
+    paddingHorizontal: 10,
+    paddingBottom: 20,
+  },
 
-/* Tarjeta utilizada para las secciones del formulario */
-newRecipeCard: {
-  backgroundColor: "rgba(255, 253, 248, 0.90)",
-  padding: 16,
-  borderRadius: 12,
-  marginBottom: 14,
-  borderWidth: 2,
-  borderColor: "#77520d",
-},
+  /* Tarjeta utilizada para las secciones del formulario */
+  newRecipeCard: {
+    backgroundColor: "rgba(255, 253, 248, 0.90)",
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 14,
+    borderWidth: 2,
+    borderColor: "#77520d",
+  },
 
-/* Campo general del formulario */
-newRecipeInput: {
-  backgroundColor: "#FFFDF8",
-  borderWidth: 1,
-  borderColor: "#C8AA7A",
-  borderRadius: 8,
-  paddingHorizontal: 12,
-  paddingVertical: 10,
-  color: "#5C4033",
-  fontSize: 15,
-},
+  /* Campo general del formulario */
+  newRecipeInput: {
+    backgroundColor: "#FFFDF8",
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    color: "#5C4033",
+    fontSize: 15,
+  },
 
-/* Fila para agregar un ingrediente */
-newRecipeIngredientRow: {
-  flexDirection: "row",
-  alignItems: "center",
-  marginBottom: 12,
-},
+  /* Fila para agregar un ingrediente */
+  newRecipeIngredientRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 12,
+  },
 
-/* Campo para escribir un ingrediente */
-newRecipeIngredientInput: {
-  flex: 1,
-  backgroundColor: "#FFFDF8",
-  borderWidth: 1,
-  borderColor: "#C8AA7A",
-  borderRadius: 8,
-  paddingHorizontal: 12,
-  paddingVertical: 10,
-  color: "#5C4033",
-  fontSize: 15,
-},
+  /* Campo para escribir un ingrediente */
+  newRecipeIngredientInput: {
+    flex: 1,
+    backgroundColor: "#FFFDF8",
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    color: "#5C4033",
+    fontSize: 15,
+  },
 
-/* Botón para agregar un ingrediente */
-newRecipeAddButton: {
-  backgroundColor: "#6B4F3A",
-  marginLeft: 8,
-  width: 45,
-  height: 45,
-  borderRadius: 8,
-  alignItems: "center",
-  justifyContent: "center",
-},
+  /* Botón para agregar un ingrediente */
+  newRecipeAddButton: {
+    backgroundColor: "#6B4F3A",
+    marginLeft: 8,
+    width: 45,
+    height: 45,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
-/* Contenedor donde se muestran los ingredientes agregados */
-newRecipeIngredientsBox: {
-  minHeight: 80,
-  backgroundColor: "#FFFDF8",
-  borderWidth: 1,
-  borderColor: "#C8AA7A",
-  borderRadius: 8,
-  padding: 12,
-},
+  /* Contenedor donde se muestran los ingredientes agregados */
+  newRecipeIngredientsBox: {
+    minHeight: 80,
+    backgroundColor: "#FFFDF8",
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+    borderRadius: 8,
+    padding: 12,
+  },
 
-/* Texto mostrado cuando todavía no existen ingredientes */
-newRecipeEmptyText: {
-  fontSize: 13,
-  color: "#8B6F5A",
-  fontStyle: "italic",
-},
+  /* Texto mostrado cuando todavía no existen ingredientes */
+  newRecipeEmptyText: {
+    fontSize: 13,
+    color: "#8B6F5A",
+    fontStyle: "italic",
+  },
 
-/* Campo de preparación de la receta */
-newRecipePreparationInput: {
-  minHeight: 140,
-  backgroundColor: "#FFFDF8",
-  borderWidth: 1,
-  borderColor: "#C8AA7A",
-  borderRadius: 8,
-  padding: 12,
-  color: "#5C4033",
-  fontSize: 15,
-  lineHeight: 21,
-},
+  /* Campo de preparación de la receta */
+  newRecipePreparationInput: {
+    minHeight: 140,
+    backgroundColor: "#FFFDF8",
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+    borderRadius: 8,
+    padding: 12,
+    color: "#5C4033",
+    fontSize: 15,
+    lineHeight: 21,
+  },
 
-/* Botón para limpiar la receta */
-newRecipeClearButton: {
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
-  paddingVertical: 12,
-  marginBottom: 5,
-  borderWidth: 1,
-  borderColor: "#C8AA7A",
-  borderRadius: 8,
-  backgroundColor: "#F5EFE6",
-},
+  /* Botón para limpiar la receta */
+  newRecipeClearButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    marginBottom: 5,
+    borderWidth: 1,
+    borderColor: "#C8AA7A",
+    borderRadius: 8,
+    backgroundColor: "#F5EFE6",
+  },
 
-/* Texto del botón para limpiar */
-newRecipeClearButtonText: {
-  marginLeft: 7,
-  fontSize: 14,
-  fontWeight: "bold",
-  color: "#6B4F3A",
-},
+  /* Texto del botón para limpiar */
+  newRecipeClearButtonText: {
+    marginLeft: 7,
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#6B4F3A",
+  },
 
+  /* Estilos para el modal de la imagen de la receta */
+  recipeImageModal: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 
+  recipeImageModalImage: {
+    width: "95%",
+    height: "85%",
+  },
 });

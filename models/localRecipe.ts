@@ -11,12 +11,10 @@ de forma que la aplicación pueda utilizar una u otra definición para acoplar
 los datos según se carguen desde el API o desde la base de datos local. */
 
 export interface LocalRecipe {
-
   id: number;
   title: string;
   title_en?: string | null;
   ingredients: string;
   preparation: string;
   recipe_context: "medieval" | "modern" | null;
-
 }

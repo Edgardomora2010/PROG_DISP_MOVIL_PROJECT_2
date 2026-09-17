@@ -1,28 +1,42 @@
 /* Importación del componente Stack desde el paquete expo-router */
 import { init_DB_TablesCreation } from "@/data/db/dbTableCreation";
+/* Importación del hook para insertar datos iniciales en la base de datos */
+import { useDBInsertTableData } from "@/data/db/dbInsertTableData";
 import { Stack } from "expo-router";
 import { useEffect } from "react";
+/* Importación del hook para cargar las fuentes medievales */
 import { useMedievalFonts } from "../styles/fonts";
+/* Importación del proveedor de recetas favoritas */
+import { FavoriteRecipesProvider } from "@/context/favoriteRecipes";
 
 /* Componente principal de la aplicación que se encarga de cargar
  las fuentes */
 export default function RootLayout() {
+  /* Inicialización de la base de datos y carga de fuentes */
   const [fontsLoaded] = useMedievalFonts();
+  const { insertDefaultUserData } = useDBInsertTableData();
 
+  /* Inicializa las tablas de la base de datos */
   useEffect(() => {
-    /* Elimina las tablas para reconstruir la base de datos */
-    // Mantener comentada esta línea durante el desarrollo
-    // para evitar la eliminación accidental de las tablas.
-
+    // **************************************************
     // delete_DB_Tables();
+    // **************************************************
 
-    /* Crea nuevamente las tablas */
     init_DB_TablesCreation();
+  }, []);
+
+  /* Inserta los datos iniciales */
+  useEffect(() => {
+    insertDefaultUserData();
   }, []);
 
   if (!fontsLoaded) {
     return null;
   }
 
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <FavoriteRecipesProvider>
+      <Stack screenOptions={{ headerShown: false }} />
+    </FavoriteRecipesProvider>
+  );
 }

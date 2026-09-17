@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import {
     Image,
     ImageBackground,
+    Modal,
     Pressable,
     ScrollView,
     Text,
@@ -37,7 +38,10 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
 
   /* Obtiene las operaciones CRUD de recetas */
   const { updateOrInsertFavoriteRecipe } = useRecipeCRUD();
+  /* Obtiene la función para verificar si una receta es favorita */
   const { isFavoriteRecipe } = useRecipeCRUD();
+  /* Estado para controlar la visibilidad de la imagen */
+  const [imageVisible, setImageVisible] = useState(false);
 
   /* useEffect para verificar el estado de favorito al montar el componente */
   useEffect(() => {
@@ -92,6 +96,29 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
           )}
         </View>
 
+        {/* Muestra la imagen ampliada */}
+        <Modal
+          visible={imageVisible}
+          transparent={true}
+          animationType="fade"
+          onRequestClose={() => setImageVisible(false)}
+        >
+          <Pressable
+            style={componentStyles.recipeImageModal}
+            onPress={() => setImageVisible(false)}
+          >
+            <Image
+              source={
+                recipeType === "modern"
+                  ? require("../assets/images/generic_recipe.png")
+                  : { uri: recipe.image_url }
+              }
+              style={componentStyles.recipeImageModalImage}
+              resizeMode="contain"
+            />
+          </Pressable>
+        </Modal>
+
         {/* Ingredientes e imagen */}
         <View style={componentStyles.recipeIngredientsCard}>
           <View style={componentStyles.recipeIngredientsContent}>
@@ -104,12 +131,25 @@ export default function RecipeDetails({ recipe }: { recipe: Recipe }) {
             ))}
           </View>
 
-          {recipe.image_url ? (
-            <Image
-              source={{ uri: recipe.image_url }}
-              style={componentStyles.recipeDetailsImage}
-            />
+          {/* Muestra imagen de la receta */}
+          {recipeType === "modern" ? (
+            /* Imagen genérica para recetas propias */
+            <Pressable onPress={() => setImageVisible(true)}>
+              <Image
+                source={require("../assets/images/generic_recipe.png")}
+                style={componentStyles.recipeDetailsImage}
+              />
+            </Pressable>
+          ) : recipe.image_url ? (
+            /* Imagen obtenida desde Storage para recetas medievales */
+            <Pressable onPress={() => setImageVisible(true)}>
+              <Image
+                source={{ uri: recipe.image_url }}
+                style={componentStyles.recipeDetailsImage}
+              />
+            </Pressable>
           ) : (
+            /* Imagen de respaldo si no existe una imagen disponible */
             <View style={componentStyles.recipeDetailsImagePlaceholder}>
               <Ionicons name="image-outline" size={40} color="#8B6F5A" />
 

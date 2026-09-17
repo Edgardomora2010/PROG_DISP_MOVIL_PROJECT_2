@@ -1,7 +1,5 @@
 /* Importación de los módulos necesarios de Drizzle ORM para definir
  el esquema de la base de datos SQLite */
-/* Importación de los módulos necesarios de Drizzle ORM para definir
- el esquema de la base de datos SQLite */
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 /* Definición de la tabla de recetas */

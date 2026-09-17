@@ -8,6 +8,7 @@ import {
     FlatList,
     ImageBackground,
     Pressable,
+    Share,
     Text,
     View,
 } from "react-native";
@@ -19,6 +20,8 @@ import { recipeService } from "../services/recipeServices";
 import { componentStyles } from "../styles/components";
 /* Importación del hook para operaciones CRUD de recetas */
 import { useRecipeCRUD } from "../hooks/useRecipeCRUD";
+/* Importación del contexto global de recetas favoritas */
+import { useFavoriteRecipes } from "../context/favoriteRecipes";
 
 /* COMPONENTE RECIPECOMPONENT PARA MANEJAR LISTAS DE RECETAS
  (MEDIEVAL, MODERNO Y FAVORITAS) */
@@ -34,6 +37,12 @@ export default function RecipeComponent({ context }: RecipeContext) {
     areThereFavoriteRecipes,
     getAllFavoriteRecipes,
   } = useRecipeCRUD();
+
+  /* Contexto global para compartir la lista de recetas favoritas */
+  const {
+    favoriteRecipes: contextFavoriteRecipes,
+    setFavoriteRecipes: setContextFavoriteRecipes,
+  } = useFavoriteRecipes();
 
   /*  Datos de prueba para la lista de recetas, se pueden reemplazar
    por datos obtenidos de una API o base de datos 
@@ -64,8 +73,10 @@ export default function RecipeComponent({ context }: RecipeContext) {
   >({});
   /* Estado local para indicar si hay recetas favoritas disponibles */
   const [favoriteRecipesStatus, setFavoriteRecipesStatus] = useState(false);
+
   /* Función para generar la clave única de una receta favorita */
   const favoriteKey = (id: number, context: string) => `${context}-${id}`;
+
   /* Función para verificar el estado de favorito de una receta */
   const checkFavoriteStatus = async (id: number, context: string) => {
     /* Verifica si la receta es favorita */
@@ -118,14 +129,15 @@ export default function RecipeComponent({ context }: RecipeContext) {
         }
 
         /* Si el contexto es favorite, se obtienen las recetas favoritas
-      almacenadas tanto en la API como en SQLite */
+        almacenadas tanto en la API como en SQLite */
         if (context === "favorite") {
           /* Carga la lista completa de recetas favoritas consultando al sql,
-        la lista contiene la información de recetas en sql y las del api */
+          la lista contiene la información de recetas en sql y las del api */
           const favData = await getAllFavoriteRecipes();
 
           /* Carga las recetas medievales */
           const medievalData = await recipeService.getRecipes();
+
           /* Filtra las recetas medievales favoritas y conserva su contexto */
           const medievalFavorites = medievalData
             .filter((recipe) =>
@@ -142,6 +154,7 @@ export default function RecipeComponent({ context }: RecipeContext) {
 
           /* Carga las recetas modernas */
           const modernData = await readAllRecipes();
+
           /* Filtra las recetas modernas favoritas y conserva su contexto */
           const modernFavorites = modernData
             .filter((recipe) =>
@@ -157,7 +170,13 @@ export default function RecipeComponent({ context }: RecipeContext) {
             }));
 
           /* Une las recetas favoritas medievales y modernas */
-          setRecipes([...medievalFavorites, ...modernFavorites]);
+          const allFavoriteRecipes = [...medievalFavorites, ...modernFavorites];
+
+          /* Actualiza la lista local de recetas */
+          setRecipes(allFavoriteRecipes);
+
+          /* Guarda la lista de favoritas en el contexto global */
+          setContextFavoriteRecipes(allFavoriteRecipes);
         }
       } catch (error) {
         console.error("Error al cargar las recetas:", error);
@@ -204,6 +223,24 @@ export default function RecipeComponent({ context }: RecipeContext) {
         },
       },
     ]);
+  };
+
+  /* Comparte la lista de recetas favoritas */
+  const shareFavorites = async () => {
+    if (contextFavoriteRecipes.length === 0) {
+      Alert.alert("Favoritos", "No hay recetas favoritas para compartir.");
+      return;
+    }
+
+    /* Genera el texto con los nombres de las recetas favoritas */
+    const recipeNames = contextFavoriteRecipes
+      .map((recipe: any) => `• ${recipe.title}`)
+      .join("\n");
+
+    /* Abre las opciones de compartir del dispositivo */
+    await Share.share({
+      message: `Mis recetas favoritas:\n\n${recipeNames}`,
+    });
   };
 
   return (
@@ -349,6 +386,17 @@ export default function RecipeComponent({ context }: RecipeContext) {
           />
           <Text style={componentStyles.recipeFooterText}>Favoritos</Text>
         </Pressable>
+
+        {/* Botón para compartir la lista de recetas favoritas */}
+        {context === "favorite" && (
+          <Pressable
+            style={componentStyles.recipeFooterItem}
+            onPress={shareFavorites}
+          >
+            <Ionicons name="share-social-outline" size={24} color="#6B4F3A" />
+            <Text style={componentStyles.recipeFooterText}>Compartir</Text>
+          </Pressable>
+        )}
       </View>
     </ImageBackground>
   );
