@@ -262,8 +262,17 @@ export default function RecipeComponent({ context }: RecipeContext) {
             <ActivityIndicator size="large" />
           ) : error ? (
             <Text>{error}</Text>
+          ) : context === "modern" && recipes.length === 0 ? (
+            /* Mensaje cuando no existen recetas propias */
+            <View style={componentStyles.emptyRecipesContainer}>
+              <Ionicons name="book-outline" size={45} color="#8B6F5A" />
+
+              <Text style={componentStyles.emptyRecipesText}>
+                No hay recetas propias registradas.
+              </Text>
+            </View>
           ) : (
-            /* FlatList para mostrar la lista de recetas obtenidas de la API */
+            /* FlatList para mostrar la lista de recetas */
             <FlatList
               data={recipes}
               keyExtractor={(item, index) =>

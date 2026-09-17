@@ -46,8 +46,9 @@ export default function LoginScreen() {
   return (
     <View style={layoutStyles.loginContainer}>
       <Image
-        source={require("../../assets/images/user.png")}
-        style={layoutStyles.libraryUser}
+        source={require("../../assets/images/LoginCover.png")}
+        style={layoutStyles.appFrontCover}
+        resizeMode="contain"
       />
 
       <Text style={componentStyles.title}>Inicio de Sesión</Text>

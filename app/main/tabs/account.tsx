@@ -32,15 +32,17 @@ export default function Account() {
         </Text>
 
         <Text style={componentStyles.bulletText}>👤 Crear una cuenta</Text>
-        <Text style={componentStyles.bulletText}>🔐 Iniciar sesión</Text>
+        <Text style={componentStyles.bulletText}>
+          🔐 Iniciar sesión (autenticación encriptada)
+        </Text>
         <Text style={componentStyles.bulletText}>
           📝 Editar información del perfil
         </Text>
         <Text style={componentStyles.bulletText}>
-          ❤️ Administrar recetas favoritas
+          ❤️ Compartición completa de recetas favoritas
         </Text>
         <Text style={componentStyles.bulletText}>
-          📖 Administrar mis recetas
+          📖 Administración más compleja de mis recetas
         </Text>
       </View>
     </ImageBackground>

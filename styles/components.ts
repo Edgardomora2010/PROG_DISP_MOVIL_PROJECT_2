@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
 
-/* Se reutiliza el archivo de estilos de otros proyectos ya
-   que se pueden aplicar los mismos estilos a los componentes 
-  de esta aplicación. */
+/* Por razones de tiempo, no fue posible renombrar muchos componentes
+de la hoja de estilo, a nombres mas descriptivos propios del proyecto
+actual (recetario) ya que fue en gran parte recolectado o reutilizado
+de los laboratorios anteriores, en los que se diseñó una app de biblioteca
+y el portafolio, por lo tanto ciertos componentes guardan dichos nombres */
 
 /* ************************************************* */
 /* ESTILOS GENERALES DE COMPONENTES                  */
@@ -653,5 +655,42 @@ export const componentStyles = StyleSheet.create({
   recipeImageModalImage: {
     width: "95%",
     height: "85%",
+  },
+
+  emptyRecipesContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 30,
+  },
+
+  emptyRecipesText: {
+    marginTop: 10,
+    fontFamily: "OldeEnglish",
+    fontSize: 25,
+    textAlign: "center",
+    color: "#6B4F3A",
+  },
+
+  /* Contenedor de imagen decorativa de ingredientes */
+  homeIngredientsContainer: {
+    width: "100%",
+    alignItems: "flex-end",
+    marginTop: 10,
+  },
+
+  /* Imagen decorativa de ingredientes */
+  homeIngredientsImage: {
+    marginTop: 30,
+    width: 180,
+    height: 200,
+  },
+
+  /* Imagen decorativa en la parte inferior del Drawer */
+  drawerImage: {
+    width: 200,
+    height: 320,
+    alignSelf: "center",
+    marginBottom: 10,
   },
 });

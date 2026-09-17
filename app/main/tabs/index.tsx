@@ -1,5 +1,5 @@
 /* Importación de componentes de React Native */
-import { Pressable, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 /* Importación de navegación */
 import { router } from "expo-router";
 /* Importación de estilos */
@@ -56,9 +56,7 @@ export default function Home() {
           })
         }
       >
-        <Text style={componentStyles.libraryButtonText}>
-          Ver mis recetas
-        </Text>
+        <Text style={componentStyles.libraryButtonText}>Ver mis recetas</Text>
       </Pressable>
 
       {/* VER HISTORIA Y LUGARES - (API) */}
@@ -70,6 +68,15 @@ export default function Home() {
           Lugares y contexto histórico
         </Text>
       </Pressable>
+
+      {/* Imagen decorativa de ingredientes */}
+      <View style={componentStyles.homeIngredientsContainer}>
+        <Image
+          source={require("../../../assets/images/ingredients.png")}
+          style={componentStyles.homeIngredientsImage}
+          resizeMode="contain"
+        />
+      </View>
     </View>
   );
 }

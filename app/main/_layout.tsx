@@ -1,12 +1,16 @@
 /* Importación del componente Drawer de Expo Router */
-import { Drawer } from "expo-router/drawer";
+import {
+    Drawer,
+    DrawerContentScrollView,
+    DrawerItemList,
+} from "expo-router/drawer";
 /* Importación de iconos */
 import { Ionicons } from "@expo/vector-icons";
 /* Importación de estilos */
 import { componentStyles } from "../../styles/components";
 /* Importación de Alert de React Native */
 import { router } from "expo-router";
-import { Alert, Text } from "react-native";
+import { Alert, Image, Text, View } from "react-native";
 
 /* OPCIONES DE PANEL DE MENU LATERAL (DRAWER) */
 
@@ -14,6 +18,22 @@ import { Alert, Text } from "react-native";
 export default function MainLayout() {
   return (
     <Drawer
+      /* Contenido del Drawer con imagen decorativa inferior */
+      drawerContent={(props) => (
+        <View style={{ flex: 1 }}>
+          {/* Opciones normales del Drawer */}
+          <DrawerContentScrollView {...props}>
+            <DrawerItemList {...props} />
+          </DrawerContentScrollView>
+
+          {/* Imagen decorativa de la cocinera */}
+          <Image
+            source={require("../../assets/images/Cook.png")}
+            style={componentStyles.drawerImage}
+            resizeMode="contain"
+          />
+        </View>
+      )}
       screenOptions={{
         headerShown: true,
         headerTitle: "Recetario Medieval",
@@ -46,7 +66,7 @@ export default function MainLayout() {
         listeners={{
           drawerItemPress: (event) => {
             event.preventDefault();
-            router.replace("../main/tabs");
+            router.replace("/main/tabs");
           },
         }}
       />
@@ -74,6 +94,18 @@ export default function MainLayout() {
           drawerIcon: ({ color, size }) => (
             <Ionicons name="book-outline" size={size} color={color} />
           ),
+        }}
+        listeners={{
+          drawerItemPress: (event) => {
+            event.preventDefault();
+
+            router.push({
+              pathname: "/main/recipeBook",
+              params: {
+                context: "medieval",
+              },
+            });
+          },
         }}
       />
 
