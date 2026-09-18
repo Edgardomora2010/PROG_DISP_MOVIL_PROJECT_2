@@ -681,15 +681,15 @@ export const componentStyles = StyleSheet.create({
 
   /* Imagen decorativa de ingredientes */
   homeIngredientsImage: {
-    marginTop: 30,
+    marginTop: 10,
     width: 180,
-    height: 200,
+    height: 150,
   },
 
   /* Imagen decorativa en la parte inferior del Drawer */
   drawerImage: {
     width: 200,
-    height: 320,
+    height: 280,
     alignSelf: "center",
     marginBottom: 10,
   },

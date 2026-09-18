@@ -4,7 +4,7 @@
     "slug": "RecetarioApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/shield_icon.png",
     "scheme": "recetarioapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -23,14 +23,14 @@
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/shield_icon.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/Kitchen.png",
+          "image": "./assets/images/kitchen.png",
           "imageWidth": 350,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
